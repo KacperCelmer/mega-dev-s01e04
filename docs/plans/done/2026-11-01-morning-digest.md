@@ -1,8 +1,9 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+closed: 2026-11-01
 ---
 
 # Morning digest
@@ -78,3 +79,27 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Issues
+
+| # | Issue | Blocked by | Worker | Closed |
+|---|-------|-----------|--------|--------|
+| 1 | [Read and aggregate the night run log](https://github.com/KacperCelmer/mega-dev-s01e04/issues/1) | — | codex · gpt-6-astra · high | 2026-11-01 |
+| 2 | [Render the digest HTML page](https://github.com/KacperCelmer/mega-dev-s01e04/issues/2) | #1 types commit | codex · gpt-6-luna · medium | 2026-11-01 |
+| 3 | [Expose the same digest rows as JSON](https://github.com/KacperCelmer/mega-dev-s01e04/issues/3) | #1 types commit | codex · gpt-6-luna · medium | 2026-11-01 |
+| 4 | [Link nights and show status counts on the board](https://github.com/KacperCelmer/mega-dev-s01e04/issues/4) | #1 types commit | codex · gpt-6-luna · medium | 2026-11-01 |
+| 5 | [Test digest HTML and JSON route states](https://github.com/KacperCelmer/mega-dev-s01e04/issues/5) | #1 types commit; route implementations for verification | codex · gpt-6-luna · medium | 2026-11-01 |
+| 6 | [Export the digest and submit its public preview for review](https://github.com/KacperCelmer/mega-dev-s01e04/issues/6) | #1–#5; reviewer confirmation | codex · GPT-6 session variant not exposed · inherited | 2026-11-01 |
+| 7 | [Remove the public marker after review and archive the plan](https://github.com/KacperCelmer/mega-dev-s01e04/issues/7) | #6; review received; separate upload approval | codex · GPT-6 session variant not exposed · inherited | 2026-11-01 |
+
+## Verification and review
+
+- `pnpm test`: 14 tests passed. `pnpm typecheck`: passed.
+- Both fixture nights link to working digests; the HTML and JSON use the same sorted reader result.
+- The 2026-10-28 fixture has 5 jobs, 1 bad line, and 10 ok / 4 retry / 1 fail events.
+- Desktop and mobile UI checks passed; source fixtures stayed unchanged.
+- The reviewer confirmed they saw the preview before the final closure of #6.
+- With separate human approval, the page was exported again with `LANE_MARKER` unset and replaced at https://mega-dev-s01e04-preview.pages.dev/. The public banner reads `no marker set`.
+- The HTML copy and `.env` remain outside tracked source.
+
+Review correction: #6 was first closed on submission, which the course rejected because the reviewer had not looked. It was reopened, and section 3 and its issue were corrected to require the review before closure.
