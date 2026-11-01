@@ -12,13 +12,14 @@ export function createApp(config: RigConfig = loadConfig()) {
 
   app.get('/health', (c) => c.json({ ok: true, lane: lane().id }));
 
-  app.get('/', (c) =>
-    c.html(
+  app.get('/', async (c) => {
+    const status = await readStatus(config);
+    return c.html(
       <Layout title="status" lane={lane()}>
-        <StatusBoard status={readStatus(config)} />
+        <StatusBoard status={status} />
       </Layout>,
-    ),
-  );
+    );
+  });
 
   app.get('/digest/:night', async (c) => {
     const digest = await readNight(config.runsDir, c.req.param('night'));
